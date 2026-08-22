@@ -1,0 +1,141 @@
+name: HAOBESH Android APK
+
+on:
+
+  workflow_dispatch:
+
+jobs:
+
+  build:
+
+    name: Build HAOBESH APK
+
+    runs-on: ubuntu-latest
+
+    timeout-minutes: 20
+
+    steps:
+
+      - name: Checkout HAOBESH
+
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+
+        uses: actions/setup-node@v4
+
+        with:
+
+          node-version: 22
+
+      - name: Setup Java
+
+        uses: actions/setup-java@v4
+
+        with:
+
+          distribution: temurin
+
+          java-version: "21"
+
+      - name: Create package.json
+
+        run: |
+
+          cat > package.json <<'EOF'
+
+          {
+
+            "name": "haobesh",
+
+            "version": "1.0.0",
+
+            "private": true
+
+          }
+
+          EOF
+
+      - name: Install Capacitor
+
+        run: |
+
+          npm install @capacitor/core@7.4.3
+
+          npm install @capacitor/android@7.4.3
+
+          npm install --save-dev @capacitor/cli@7.4.3
+
+      - name: Prepare web files
+
+        run: |
+
+          mkdir -p www
+
+          cp index.html www/
+
+          cp style.css www/
+
+          cp script.js www/
+
+          cp manifest.json www/
+
+          cp sw.js www/
+
+      - name: Create Capacitor configuration
+
+        run: |
+
+          cat > capacitor.config.json <<'EOF'
+
+          {
+
+            "appId": "com.haobesh.app",
+
+            "appName": "HAOBESH",
+
+            "webDir": "www"
+
+          }
+
+          EOF
+
+      - name: Add Android
+
+        run: |
+
+          npx cap add android
+
+      - name: Sync Android
+
+        run: |
+
+          npx cap sync android
+
+      - name: Build Debug APK
+
+        run: |
+
+          cd android
+
+          chmod +x gradlew
+
+          ./gradlew assembleDebug --no-daemon --stacktrace
+
+      - name: Check APK
+
+        run: |
+
+          ls -lh android/app/build/outputs/apk/debug/app-debug.apk
+
+      - name: Upload HAOBESH APK
+
+        uses: actions/upload-artifact@v4
+
+        with:
+
+          name: HAOBESH-APK
+
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+
+          if-no-files-found: error
