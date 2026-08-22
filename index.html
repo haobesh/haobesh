@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+
+<html lang="ku" dir="rtl">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <meta name="theme-color" content="#080a0d">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <meta name="apple-mobile-web-app-title" content="HAOBESH">
+
+  <link rel="manifest" href="./manifest.json">
+
+  <link rel="stylesheet" href="./style.css">
+
+  <title>HAOBESH — بازاڕی کوردی</title>
+
+</head>
+
+<body>
+
+<header class="header">
+
+  <div class="container nav">
+
+    <a href="#home" class="logo">
+
+      HAO<span>BESH</span>
+
+    </a>
+
+    <nav id="navLinks" class="nav-links">
+
+      <button data-scroll="home">سەرەتا</button>
+
+      <button data-scroll="listings">کۆگا</button>
+
+      <button data-scroll="categories">جۆرەکان</button>
+
+      <button data-scroll="sell">کەلوپەل بفڕۆشە</button>
+
+      <button id="loginButton">چوونەژوورەوە</button>
+
+    </nav>
+
+    <button id="menuButton" class="menu-btn" aria-label="Menu">
+
+      ☰
+
+    </button>
+
+  </div>
+
+</header>
+
+<main id="home">
+
+  <section class="hero">
+
+    <div class="container hero-content">
+
+      <div class="eyebrow">بازاڕی کوردی</div>
+
+      <h1>
+
+        هەموو شتێک،
+
+        <br>
+
+        لە یەک شوێن
+
+      </h1>
+
+      <p>
+
+        لە HAOBESH بە ئاسانی کەلوپەل بدۆزەوە،
+
+        کەلوپەل بفڕۆشە و کار بدۆزەوە.
+
+      </p>
+
+      <div class="hero-actions">
+
+        <button class="btn btn-primary" data-scroll="listings">
+
+          کەلوپەل ببینە
+
+        </button>
+
+        <button class="btn btn-secondary" data-scroll="sell">
+
+          کەلوپەل بفڕۆشە
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <div class="container search-section">
+
+    <div class="search-box">
+
+      <input
+
+        id="searchInput"
+
+        type="search"
+
+        placeholder="چی دەگەڕێیت؟"
+
+        autocomplete="off"
+
+      >
+
+      <button id="searchButton">
+
+        🔎 گەڕان
+
+      </button>
+
+    </div>
+
+  </div>
+
+  <section id="categories">
+
+    <div class="container">
+
+      <div class="section-title">
+
+        <h2>جۆرەکان</h2>
+
+        <p>کەلوپەلەکان بە جۆرە جیاوازەکان ببینە.</p>
+
+      </div>
+
+      <div class="categories">
+
+        <button class="category" data-category="مۆبایل">
+
+          <div class="icon">📱</div>
+
+          <span>مۆبایل</span>
+
+        </button>
+
+        <button class="category" data-category="کۆمپیوتەر">
+
+          <div class="icon">💻</div>
+
+          <span>کۆمپیوتەر</span>
+
+        </button>
+
+        <button class="category" data-category="ئۆتۆمبێل">
+
+          <div class="icon">🚗</div>
+
+          <span>ئۆتۆمبێل</span>
+
+        </button>
+
+        <button class="category" data-category="ماڵ">
+
+          <div class="icon">🏠</div>
+
+          <span>ماڵ</span>
+
+        </button>
+
+        <button class="category" data-category="جل و بەرگ">
+
+          <div class="icon">👕</div>
+
+          <span>جل و بەرگ</span>
+
+        </button>
+
+        <button class="category" data-category="ئەلیکترۆنیات">
+
+          <div class="icon">🎧</div>
+
+          <span>ئەلیکترۆنیات</span>
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section id="listings">
+
+    <div class="container">
+
+      <div class="section-title">
+
+        <h2>نوێترین کەلوپەلەکان</h2>
+
+        <p>کەلوپەلە نوێیەکان لە HAOBESH.</p>
+
+      </div>
+
+      <div class="listing-tools">
+
+        <span id="resultCount">
+
+          هەموو کەلوپەلەکان
+
+        </span>
+
+        <select id="categoryFilter">
+
+          <option value="all">هەموو جۆرەکان</option>
+
+          <option value="مۆبایل">مۆبایل</option>
+
+          <option value="کۆمپیوتەر">کۆمپیوتەر</option>
+
+          <option value="ئۆتۆمبێل">ئۆتۆمبێل</option>
+
+          <option value="ماڵ">ماڵ</option>
+
+          <option value="جل و بەرگ">جل و بەرگ</option>
+
+          <option value="ئەلیکترۆنیات">ئەلیکترۆنیات</option>
+
+        </select>
+
+      </div>
+
+      <div id="listingsContainer" class="listings"></div>
+
+    </div>
+
+  </section>
+
+  <section id="sell">
+
+    <div class="container">
+
+      <div class="section-title">
+
+        <h2>کەلوپەل بفڕۆشە</h2>
+
+        <p>
+
+          زانیاری کەلوپەلەکەت بنووسە و زیادیکە بە بازاڕەکە.
+
+        </p>
+
+      </div>
+
+      <div class="sell-card">
+
+        <form id="sellForm">
+
+          <div class="form-grid">
+
+            <div class="field">
+
+              <label for="productName">ناوی کەلوپەل</label>
+
+              <input
+
+                id="productName"
+
+                class="input"
+
+                required
+
+                placeholder="بۆ نموونە: iPhone 15"
+
+              >
+
+            </div>
+
+            <div class="field">
+
+              <label for="productPrice">نرخ</label>
+
+              <input
+
+                id="productPrice"
+
+                class="input"
+
+                type="number"
+
+                min="1"
+
+                required
+
+                placeholder="750"
+
+              >
+
+            </div>
+
+            <div class="field">
+
+              <label for="productCategory">جۆر</label>
+
+              <select id="productCategory" required>
+
+                <option value="">جۆر هەڵبژێرە</option>
+
+                <option value="مۆبایل">مۆبایل</option>
+
+                <option value="کۆمپیوتەر">کۆمپیوتەر</option>
+
+                <option value="ئۆتۆمبێل">ئۆتۆمبێل</option>
+
+                <option value="ماڵ">ماڵ</option>
+
+                <option value="جل و بەرگ">جل و بەرگ</option>
+
+                <option value="ئەلیکترۆنیات">ئەلیکترۆنیات</option>
+
+              </select>
+
+            </div>
+
+            <div class="field">
+
+              <label for="productLocation">شوێن</label>
+
+              <input
+
+                id="productLocation"
+
+                class="input"
+
+                required
+
+                placeholder="بۆ نموونە: سلێمانی"
+
+              >
+
+            </div>
+
+            <div class="field full">
+
+              <label for="productDescription">وەسف</label>
+
+              <textarea
+
+                id="productDescription"
+
+                placeholder="وەسفی کەلوپەلەکەت..."
+
+              ></textarea>
+
+            </div>
+
+            <div class="field full">
+
+              <button
+
+                class="btn btn-primary"
+
+                type="submit"
+
+              >
+
+                ➕ زیادکردنی کەلوپەل
+
+              </button>
+
+            </div>
+
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section>
+
+    <div class="container about">
+
+      <div class="about-card">
+
+        <h3>HAOBESH چییە؟</h3>
+
+        <p>
+
+          HAOBESH پلاتفۆرمێکی بازاڕی کوردییە
+
+          بۆ دۆزینەوە و فرۆشتنی کەلوپەل.
+
+        </p>
+
+      </div>
+
+      <div class="about-card">
+
+        <h3>بۆچی HAOBESH؟</h3>
+
+        <p>
+
+          دیزاینێکی خێرا و سادە،
+
+          گونجاو بۆ مۆبایل و کۆمپیوتەر
+
+          و پشتگیری زمانی کوردی.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+
+  <div class="container">
+
+    <div class="logo">
+
+      HAO<span>BESH</span>
+
+    </div>
+
+    <p>
+
+      © 2026 HAOBESH — هەموو مافەکان پارێزراون.
+
+    </p>
+
+  </div>
+
+</footer>
+
+<div id="modal" class="modal">
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+
+      <h2 id="modalTitle">HAOBESH</h2>
+
+      <button id="closeModal" class="close">
+
+        ×
+
+      </button>
+
+    </div>
+
+    <div id="modalContent"></div>
+
+  </div>
+
+</div>
+
+<div id="message" class="message"></div>
+
+<script src="./script.js"></script>
+
+</body>
+
+</html>
